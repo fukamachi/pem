@@ -4,4 +4,4 @@
   :author "Eitaro Fukamachi"
   :license "BSD 2-Clause"
   :description "PEM parser"
-  :depends-on ("pem/main"))
+  :depends-on ("asn1" "cl-ppcre" "optima" "ironclad" "cl-base64" "pem/main"))
