@@ -5,6 +5,8 @@
   (:import-from #:asn1
                 #:decode
                 #:rsa-public-key-info)
+  (:import-from #:trivia
+                #:match)
   (:import-from #:cl-base64
                 #:base64-string-to-usb8-array)
   (:import-from #:ironclad)
@@ -14,7 +16,7 @@
 (defun read-public-key (key)
   (let* ((der (base64:base64-string-to-usb8-array key))
          (der (asn1:decode der)))
-    (optima:match der
+    (match der
       ((asn1:rsa-public-key-info n e)
        (ironclad:make-public-key :rsa :n n :e e))
       (otherwise (error "Unexpected format: ~S" key)))))
@@ -22,7 +24,7 @@
 (defun read-private-key (key)
   (let* ((der (base64:base64-string-to-usb8-array key))
          (der (asn1:decode der)))
-    (optima:match der
+    (match der
       ((asn1:rsa-private-key :private-exponent d :modulus n)
        (ironclad:make-private-key :rsa :d d :n n))
       (otherwise (error "Unexpected format: ~S" key)))))
