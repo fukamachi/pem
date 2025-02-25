@@ -68,7 +68,7 @@ Only support RSA private keys."
 
 (defun read-from-file (pem)
   (let ((data (pem/parser:parse-file pem)))
-    (dispatch data)))
+    (read-key data)))
 
 (defgeneric read-pem (pem)
   (:method ((pem pathname))
