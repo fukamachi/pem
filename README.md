@@ -33,15 +33,15 @@ PEM parser.
 ### Reading an RSA public/private keys from other sources
 
 ```common-lisp
-(defparameter pem-string (alexandria:read-file-into-string #P"/tmp/rsa-pub.pem"))
+(defparameter pem-string (alexandria:read-file-into-string #P"rsa-pub.pem"))
 ;=> PEM-STRING
 (pem:read-pem pem-string)            ; string source
-;=> #<IRONCLAD:RSA-PRIVATE-KEY {1001E10203}>
+;=> #<IRONCLAD:RSA-PUBLIC-KEY {1001E10203}>
 
-(defparameter pem-stream (open #P"/tmp/rsa-pub.pem"))
+(defparameter pem-stream (open #P"rsa-pub.pem"))
 ;=> PEM-STREAM
 (pem:read-pem pem-stream)            ; stream source
-;=> #<IRONCLAD:RSA-PRIVATE-KEY {1002D90493}>
+;=> #<IRONCLAD:RSA-PUBLIC-KEY {1002D90493}>
 
 (pem:read-pem #P"rsa-pub.pem")       ; file source
 ;=> #<IRONCLAD::RSA-PUBLIC-KEY {1004FD26B3}>
