@@ -20,7 +20,7 @@ PEM parser.
 ;   cwIDAQAB"))
 ```
 
-### Reading an RSA public/private keys
+### Reading an RSA public/private keys from a file
 
 ```common-lisp
 (pem:read-from-file #P"rsa-pub.pem")
@@ -28,4 +28,21 @@ PEM parser.
 
 (pem:read-from-file #P"rsa-priv.pem")
 ;=> #<IRONCLAD::RSA-PRIVATE-KEY {10050CDB03}>
+```
+
+### Reading an RSA public/private keys from other sources
+
+```common-lisp
+(defparameter pem-string (alexandria:read-file-into-string #P"rsa-pub.pem"))
+;=> PEM-STRING
+(pem:read-pem pem-string)            ; string source
+;=> #<IRONCLAD:RSA-PUBLIC-KEY {1001E10203}>
+
+(defparameter pem-stream (open #P"rsa-pub.pem"))
+;=> PEM-STREAM
+(pem:read-pem pem-stream)            ; stream source
+;=> #<IRONCLAD:RSA-PUBLIC-KEY {1002D90493}>
+
+(pem:read-pem #P"rsa-pub.pem")       ; file source
+;=> #<IRONCLAD::RSA-PUBLIC-KEY {1004FD26B3}>
 ```
